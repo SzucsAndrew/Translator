@@ -101,7 +101,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
         detections => {
           const possibleLanguage = this.getHightestConfidence(detections);
           this.hideLoading();
-          if(possibleLanguage){
+          if (possibleLanguage) {
             this.selectedLanguageSource.setValue(possibleLanguage);
           }
         },
@@ -110,7 +110,7 @@ export class TranslateComponent implements OnInit, OnDestroy {
   }
 
   getHightestConfidence(detections: Detection[]): Language | undefined {
-    if(detections.length === 0) { return; }
+    if (detections.length === 0) { return; }
 
     const hightestConfidence = Math.max(...detections.map(d => d.confidence));
     const detection = detections.find(x => x.confidence === hightestConfidence);
