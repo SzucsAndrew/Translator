@@ -1,0 +1,37 @@
+.action-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    margin: 24px auto;
+    padding: 32px;
+}
+
+.full-width {
+    width: 500px;
+}
+
+mat-progress-bar {
+    position: absolute;
+    bottom: 0;
+}
+
+.center-screen {
+    position: absolute;
+}
+
+.mat-button-disabled.mat-button-disabled {
+    color: gray;
+    background-color: transparent;
+
+    mat-icon {
+        color: gray;
+    }
+}
+
+mat-icon,
+mat-label,
+button.mat-flat-button {
+    color: darkblue;
+}

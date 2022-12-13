@@ -1,0 +1,52 @@
+<form [formGroup]="form" class="action-bar">
+    <mat-card>
+        <mat-card-content>
+            <div>
+                <button mat-flat-button (click)="detect()" [disabled]="isLoading">Detect</button>
+                <mat-form-field appearance="outline">
+                    <mat-label>Languages</mat-label>
+                    <mat-select formControlName="selectedLanguageSource">
+                        <mat-option *ngFor="let language of languages" [value]="language">
+                            {{language.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls.selectedLanguageSource.errors?.required">
+                        Please select language!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Translate text</mat-label>
+                <textarea matInput cdkTextareaAutosize="false" rows="20" formControlName="sourceText"
+                    [readonly]="isLoading"></textarea>
+                <mat-error *ngIf="form.controls.sourceText.errors?.required">
+                    Translate text must be provided!
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+    <button mat-button (click)="swap()" [disabled]="isLoading"><mat-icon>swap_horiz</mat-icon></button>
+    <mat-card>
+        <mat-card-content>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Languages</mat-label>
+                    <mat-select formControlName="selectedLanguageTarget">
+                        <mat-option *ngFor="let language of languages" [value]="language">
+                            {{language.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls.selectedLanguageTarget.errors?.required">
+                        Please select language!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Translated text</mat-label>
+                <textarea matInput cdkTextareaAutosize="false" rows="20" readonly="true"
+                    formControlName="targetText"></textarea>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+    <mat-spinner class="center-screen" *ngIf="isLoading" [diameter]="50" mode="indeterminate"></mat-spinner>
+</form>

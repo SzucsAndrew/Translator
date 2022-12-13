@@ -1,0 +1,9 @@
+{
+    "/api": {
+        "target": "https://libretranslate.de",
+        "secure": true,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": { "^/api": "" }
+    }
+}

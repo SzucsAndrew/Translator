@@ -1,0 +1,51 @@
+<form [formGroup]="form" (ngSubmit)="submitted()">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Registration</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="registration-form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Username" formControlName="username">
+                    <mat-error *ngIf="form.controls.username.errors?.required">
+                        Username must be provided!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" formControlName="email">
+                    <mat-error *ngIf="form.controls.email.errors?.required">
+                        Email must be provided!
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.email.errors?.email">
+                        <p>Email must be valid!
+                            For example.: test@test.com</p>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput placeholder="+36 12 345 6789" formControlName="phoneNumber">
+                    <mat-error *ngIf="form.controls.phoneNumber.errors?.required">
+                        Phone number must be provided!
+                    </mat-error>
+                    <mat-error *ngIf="form.controls.phoneNumber.errors?.pattern">
+                        <p>The phone number must be valid. For example: 06 12 345 6789, +36 12 345 6789</p>
+                    </mat-error>
+                </mat-form-field>
+                <div>
+                    <div>
+                        <mat-label>I agree the terms of managing data</mat-label>
+                        <mat-checkbox formControlName="termsAccept"></mat-checkbox>
+                    </div>
+                    <mat-error *ngIf="form.controls.termsAccept.errors?.required">
+                        Terms must be accepted!
+                    </mat-error>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="start">
+            <button mat-button [disabled]="form.invalid" color="primary">Registration</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
