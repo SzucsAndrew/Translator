@@ -98,19 +98,25 @@ export class TranslateComponent implements OnInit, OnDestroy {
 
       this.showLoading();
       this.translateService.detect(sourceTextValue).subscribe(
-        detections => { this.setHightestConfidence(detections); this.hideLoading(); },
+        detections => {
+          const possibleLanguage = this.getHightestConfidence(detections);
+          this.hideLoading();
+          if(possibleLanguage){
+            this.selectedLanguageSource.setValue(possibleLanguage);
+          }
+        },
         error => this.showError(error));
     }
   }
 
-  setHightestConfidence(detections: Detection[]): void {
-    const hightestConfidence = detections.find(x => x.confidence);
-    if (!hightestConfidence) { return; }
+  getHightestConfidence(detections: Detection[]): Language | undefined {
+    if(detections.length === 0) { return; }
 
-    const possibleLanguage = this.languages.find(x => x.code === hightestConfidence.language);
-    if (possibleLanguage) {
-      this.selectedLanguageSource.setValue(possibleLanguage);
-    }
+    const hightestConfidence = Math.max(...detections.map(d => d.confidence));
+    const detection = detections.find(x => x.confidence === hightestConfidence);
+    if (!detection) { return undefined; }
+
+    return this.languages.find(x => x.code === detection.language);
   }
 
   swap(): void {

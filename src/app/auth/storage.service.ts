@@ -45,7 +45,7 @@ export class StorageService {
 
   public increaseTrialCount(): void {
     let count = this.getTrialCount();
-    this.saveTrialCount(count++);
+    this.saveTrialCount(++count);
   }
 
   private saveTrialCount(count: number): void {
