@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
-
       if (this.authService.hasPrivilege()) {
         return next.handle(request);
       }
